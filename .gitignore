@@ -1,0 +1,10 @@
+node_modules/
+.wrangler/
+__pycache__/
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+**/dist/
+**/qa/
+*.zip

@@ -1,0 +1,45 @@
+/* English overrides. Shared geometry and Chinese typography stay in the base styles. */
+.english-deck {font-family:Arial,"Helvetica Neue",sans-serif;}
+.english-deck .heading h2{font-size:40px;letter-spacing:-.6px;line-height:1.2}.english-deck .heading>p{font-size:21px;line-height:1.4}.english-deck .eyebrow{font-size:15px;letter-spacing:1.5px}.english-deck .slide-footer{font-size:12px}.english-deck .chapter-nav a{font-size:14px}.english-deck .chatbi-demo-brief h3{font-size:28px;line-height:1.25}.english-deck .chatbi-demo-brief p{font-size:15px;line-height:1.5}.english-deck .chatbi-next li{font-size:17px}.english-deck .chatbi-demo-brief b{font-size:18px}.english-deck .bi-node text{font-size:18px}.english-deck .bi-cloud text{font-size:17px}.english-deck .bi-node .bi-small{font-size:12px}.english-deck .bi-node .bi-caption{font-size:11px}.english-deck .bi-codearts text{font-size:21px}.english-deck .bi-codearts .bi-small{font-size:14px}.english-deck .bi-codearts .bi-dev-label{font-size:12px}.english-deck .bi-user-node .bi-small{font-size:12px}.english-deck .chatbi-map{height:420px}.english-deck .chatbi-architecture{min-height:0}.english-deck .chatbi-diagram-heading>b{font-size:21px}.english-deck .chatbi-diagram-heading>span{font-size:13px}
+.english-deck .technical-columns h3{font-size:24px;margin-bottom:12px}.english-deck .technical-row{gap:16px;padding:11px 0}.english-deck .technical-row b{font-size:16px;min-width:115px}.english-deck .technical-row p{font-size:16px;line-height:1.4}.english-deck .recovery-levels{font-size:16px;gap:5px;margin:14px 0 16px}.english-deck .recovery-levels span{padding:9px 8px}.english-deck .technical-subtitle{font-size:17px;line-height:1.5}.english-deck .launch-note{line-height:1.5;padding-top:12px}
+.english-deck .product-values article{padding:12px 0}.english-deck .product-values article h3{font-size:23px;margin-bottom:7px}.english-deck .product-values article p{font-size:16px;line-height:1.35}.english-deck .product-values .panel-caption{margin-bottom:14px}.english-deck .original-metrics{padding-top:14px}.english-deck .original-metrics b{font-size:18px}.english-deck .console-spine{padding:12px;gap:20px}.english-deck .console-spine b{font-size:18px}.english-deck .product-layer>span{font-size:13px}.english-deck .product-execution p{font-size:13px}.english-deck .architecture-ecosystem{font-size:11px!important}
+.english-deck .live-principle .principle-caption{margin-bottom:10px}.english-deck .live-principle .flow-wire{height:22px}.english-deck .flow-indexes>div{height:125px}.english-deck .flow-indexes small{font-size:7.5px;line-height:1.2;margin-top:5px}.english-deck .flow-graph,.english-deck .flow-vectors{height:65px}.english-deck .flow-source,.english-deck .flow-context{padding:6px}.english-deck .flow-note{font-size:9px;line-height:1.3;margin-top:7px}
+@media(max-width:460px){.english-deck .controls{padding-left:8px;padding-right:8px;gap:7px}.english-deck .controls .icon-button{width:25px}.english-deck .controls #page-counter{min-width:58px}.english-deck .controls .control-right{gap:5px}.english-deck .controls .text-button{font-size:10px}.english-deck .controls .text-button>span:first-child{font-size:15px}}
+.english-deck .flow-graph{height:60px}.english-deck .flow-vectors{gap:3px}.english-deck .flow-vectors span{height:12px;line-height:9px;font-size:7.5px}
+
+/* Let long English labels use their allotted column instead of widening a card. */
+.english-deck :is(.architecture-content,.architecture-module,.architecture-module>div,
+  .product-layer>div,.kb-cloud-content>div,.kb-library-body>div) {
+  min-width:0;
+}
+.english-deck .model-family {flex-wrap:wrap;gap:6px;}
+.english-deck .panorama .architecture-module p {font-size:15px;line-height:1.35;}
+.english-deck .product-layer {grid-template-columns:90px minmax(0,1fr);}
+.english-deck .product-layer b,
+.english-deck .product-execution p,
+.english-deck .architecture-ecosystem {white-space:normal;}
+.english-deck .product-layer b {line-height:1.35;}
+.english-deck .product-tags {flex-wrap:wrap;}
+.english-deck .kb-cloud-content {grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr);}
+.english-deck .kb-ingestion-steps {gap:8px;}
+.english-deck .kb-ingestion-steps>span {white-space:normal;text-align:center;line-height:1.3;}
+.english-deck .kb-scope-tags {flex-wrap:wrap;gap:6px;}
+
+/* SVG text cannot wrap like HTML. Fit the titles within the icon-and-text nodes. */
+.english-deck .bi-node:not(.bi-codearts)>text:not(.bi-small):not(.bi-caption) {font-size:16px;}
+.english-deck .bi-node.bi-cloud>text:not(.bi-small):not(.bi-caption) {font-size:15px;}
+
+/* Two-line English layer names should not make the five-layer diagram taller. */
+.english-deck .architecture-label b {line-height:1.25;}
+.english-deck .live-principle .principle-caption {margin-bottom:8px;}
+.english-deck .live-principle .flow-wire {height:14px;}
+.english-deck .flow-indexes>div {height:auto;min-height:142px;}
+.english-deck .agent-plan-table th:first-child{font-size:20px}
+.english-deck .agent-plan-table td{font-size:23px}
+.english-deck .agent-overage h3{font-size:24px;line-height:1.25}
+.english-deck .agent-overage p{font-size:19px;line-height:1.4}
+.english-deck .agent-overage>div>span:not(.mini-kicker){font-size:16px}
+.english-deck .case-request>b{font-size:21px}.english-deck .case-lane h3{font-size:21px}.english-deck .case-lane-state{font-size:12px}.english-deck .case-chat p{font-size:17px}.english-deck .case-spec-files p{font-size:15px}.english-deck .case-result>b{font-size:16px}.english-deck .case-connection{font-size:18px}
+.english-deck .ops-slide .heading h2{font-size:38px}.english-deck .ops-slide .heading>p{font-size:20px}.english-deck .ops-scenarios b{font-size:19px}.english-deck .ops-task h3{font-size:25px}.english-deck .ops-task p{font-size:18px}.english-deck .ops-skill b{font-size:17px}.english-deck .ops-output b{font-size:18px}.english-deck .ops-overview{font-size:16px}.english-deck .ops-overview tbody th{font-size:19px}
+
+.english-deck .dc-foundation b{font-size:17px}.english-deck .dc-foundation div>span{font-size:13px;letter-spacing:0}

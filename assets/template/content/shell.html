@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>{{TITLE}}</title>
+<link rel="icon" href="assets/huawei-logo.png">
+<link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/english.css">
+<script defer src="js/config.js"></script><script defer src="js/navigation.js"></script><script defer src="js/app.js"></script><script defer src="js/translations.js"></script><script defer src="js/language.js"></script><script defer src="js/scenes.js"></script>
+</head><body><main id="viewport" aria-label="{{TITLE}}"><div id="deck">{{SLIDES}}</div></main>
+  <nav id="controls" class="controls" aria-label="演示控制">
+    <div class="control-left"><span class="status-dot"></span><span id="section-label">开场</span></div>
+    <div class="control-center"><button id="previous" class="icon-button" aria-label="上一页" title="上一页 · ← / Page Up">‹</button><button id="page-counter" title="打开目录 · G" aria-haspopup="dialog">01 <span>/ 1</span></button><button id="next" class="icon-button" aria-label="下一页" title="下一页 · → / 空格">›</button></div>
+    <div class="control-right"><button id="overview" class="text-button" title="目录 · G"><span class="grid-icon" aria-hidden="true">▦</span>目录</button><span class="control-divider"></span><button id="language-toggle" class="text-button" type="button" aria-label="切换到英文" title="切换到英文">EN</button><span class="control-divider"></span><button id="fullscreen" class="text-button" title="全屏 · F"><span aria-hidden="true">⛶</span><span id="fullscreen-label">全屏</span></button></div>
+    <div class="progress-track"><div id="progress"></div></div>
+  </nav>
+  <div id="announcement" class="sr-only" aria-live="polite"></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="overview-dialog" aria-labelledby="overview-title"><div class="dialog-header"><div><div class="eyebrow">PRESENTATION INDEX</div><h2 id="overview-title">演示目录</h2></div><button id="close-overview" class="icon-button" aria-label="关闭目录">×</button></div><div id="overview-grid"></div><div class="dialog-footer">点击页面直接跳转 <span>Esc 关闭</span></div></dialog>
+</body></html>

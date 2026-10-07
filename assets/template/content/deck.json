@@ -1,0 +1,385 @@
+{
+  "id": "product-deck-example",
+  "title": {
+    "zh": "产品介绍 · 模板",
+    "en": "Product presentation · Template"
+  },
+  "brandLabel": "HUAWEI CLOUD",
+  "footer": {
+    "zh": "产品名称 · 核心价值",
+    "en": "Product name · Core value"
+  },
+  "chapters": [
+    {
+      "label": {
+        "zh": "概览",
+        "en": "Overview"
+      },
+      "section": {
+        "zh": "产品概览",
+        "en": "Product overview"
+      }
+    },
+    {
+      "label": {
+        "zh": "能力",
+        "en": "Capabilities"
+      },
+      "section": {
+        "zh": "产品能力",
+        "en": "Product capabilities"
+      }
+    },
+    {
+      "label": {
+        "zh": "方案",
+        "en": "Solutions"
+      },
+      "section": {
+        "zh": "方案与套餐",
+        "en": "Solutions & plans"
+      }
+    },
+    {
+      "label": {
+        "zh": "演示",
+        "en": "Demo"
+      },
+      "section": "Demo"
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "title": {
+        "zh": "产品名称",
+        "en": "Product name"
+      },
+      "eyebrow": {
+        "zh": "企业产品介绍",
+        "en": "Enterprise product briefing"
+      },
+      "subtitle": {
+        "zh": "一句话说明面向谁、解决什么问题",
+        "en": "Describe who the product serves and which problem it solves"
+      },
+      "tagline": "HUAWEI CLOUD"
+    },
+    {
+      "type": "cards",
+      "section": {
+        "zh": "产品概览",
+        "en": "Product overview"
+      },
+      "title": {
+        "zh": "用三个价值说明为什么选择它",
+        "en": "Three reasons to choose the product"
+      },
+      "subtitle": {
+        "zh": "用客户能理解的结果组织介绍",
+        "en": "Explain the outcomes that matter to customers"
+      },
+      "cards": [
+        {
+          "title": {
+            "zh": "业务价值",
+            "en": "Business value"
+          },
+          "body": {
+            "zh": "填写客户希望获得的结果，以及产品如何支持它。",
+            "en": "Describe the outcome customers need and how the product supports it."
+          }
+        },
+        {
+          "title": {
+            "zh": "使用体验",
+            "en": "User experience"
+          },
+          "body": {
+            "zh": "填写工作流程如何变得简单，并给出一个具体例子。",
+            "en": "Explain how the workflow becomes simpler, with one concrete example."
+          }
+        },
+        {
+          "title": {
+            "zh": "企业能力",
+            "en": "Enterprise capabilities"
+          },
+          "body": {
+            "zh": "填写与目标客户有关的集成、管理与治理能力。",
+            "en": "Describe integration, management and governance for your target customers."
+          }
+        }
+      ]
+    },
+    {
+      "type": "architecture",
+      "section": {
+        "zh": "产品能力",
+        "en": "Product capabilities"
+      },
+      "title": {
+        "zh": "从业务场景到基础能力",
+        "en": "From business scenarios to core capabilities"
+      },
+      "subtitle": {
+        "zh": "每层只保留最重要的模块",
+        "en": "Keep the most important modules in each layer"
+      },
+      "layers": [
+        {
+          "label": {
+            "zh": "业务场景",
+            "en": "Business scenarios"
+          },
+          "items": [
+            {
+              "zh": "场景一",
+              "en": "Scenario one"
+            },
+            {
+              "zh": "场景二",
+              "en": "Scenario two"
+            },
+            {
+              "zh": "场景三",
+              "en": "Scenario three"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "产品服务",
+            "en": "Product services"
+          },
+          "items": [
+            {
+              "zh": "核心服务",
+              "en": "Core service"
+            },
+            {
+              "zh": "管理与治理",
+              "en": "Management & governance"
+            }
+          ]
+        },
+        {
+          "label": {
+            "zh": "基础资源",
+            "en": "Foundation"
+          },
+          "items": [
+            {
+              "zh": "资源与平台",
+              "en": "Resources & platform"
+            },
+            {
+              "zh": "生态与集成",
+              "en": "Ecosystem & integration"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "comparison",
+      "section": {
+        "zh": "方案与套餐",
+        "en": "Solutions & plans"
+      },
+      "title": {
+        "zh": "两种方案如何选择",
+        "en": "Choosing between two approaches"
+      },
+      "subtitle": {
+        "zh": "按适用场景、工作方式和交付结果比较",
+        "en": "Compare use cases, workflows and deliverables"
+      },
+      "columns": [
+        {
+          "kicker": "01",
+          "title": {
+            "zh": "方案 A",
+            "en": "Approach A"
+          },
+          "summary": {
+            "zh": "填写方案 A 的适用人群",
+            "en": "Describe the audience for approach A"
+          },
+          "bullets": [
+            {
+              "zh": "适用场景：待补充",
+              "en": "Use cases: to be provided"
+            },
+            {
+              "zh": "核心方式：待补充",
+              "en": "Workflow: to be provided"
+            },
+            {
+              "zh": "交付结果：待补充",
+              "en": "Deliverables: to be provided"
+            }
+          ]
+        },
+        {
+          "kicker": "02",
+          "title": {
+            "zh": "方案 B",
+            "en": "Approach B"
+          },
+          "summary": {
+            "zh": "填写方案 B 的适用人群",
+            "en": "Describe the audience for approach B"
+          },
+          "bullets": [
+            {
+              "zh": "适用场景：待补充",
+              "en": "Use cases: to be provided"
+            },
+            {
+              "zh": "核心方式：待补充",
+              "en": "Workflow: to be provided"
+            },
+            {
+              "zh": "交付结果：待补充",
+              "en": "Deliverables: to be provided"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "section": {
+        "zh": "方案与套餐",
+        "en": "Solutions & plans"
+      },
+      "title": {
+        "zh": "套餐价格与容量",
+        "en": "Plan pricing and capacity"
+      },
+      "subtitle": {
+        "zh": "示例结构：替换为实际产品的套餐信息",
+        "en": "Example structure: replace with the actual product plans"
+      },
+      "headers": [
+        {
+          "zh": "套餐",
+          "en": "Plan"
+        },
+        {
+          "zh": "价格",
+          "en": "Price"
+        },
+        {
+          "zh": "容量",
+          "en": "Capacity"
+        },
+        {
+          "zh": "适用团队",
+          "en": "Intended team"
+        }
+      ],
+      "rows": [
+        [
+          {
+            "zh": "基础版",
+            "en": "Basic"
+          },
+          {
+            "zh": "待填写",
+            "en": "To be provided"
+          },
+          {
+            "zh": "待填写",
+            "en": "To be provided"
+          },
+          {
+            "zh": "待填写",
+            "en": "To be provided"
+          }
+        ],
+        [
+          {
+            "zh": "专业版",
+            "en": "Professional"
+          },
+          {
+            "zh": "待填写",
+            "en": "To be provided"
+          },
+          {
+            "zh": "待填写",
+            "en": "To be provided"
+          },
+          {
+            "zh": "待填写",
+            "en": "To be provided"
+          }
+        ]
+      ],
+      "note": {
+        "zh": "在这里说明用尽套餐后的处理方式；只填已确认的产品规则。",
+        "en": "Explain what happens after the allowance is used, based on confirmed product rules."
+      }
+    },
+    {
+      "type": "workflow",
+      "section": "Demo",
+      "title": {
+        "zh": "用一个任务理解完整流程",
+        "en": "Understand the workflow with one task"
+      },
+      "subtitle": {
+        "zh": "轻量逐步高亮，可暂停、重播或直接显示完整流程",
+        "en": "Simple step highlights: pause, replay or show the complete workflow"
+      },
+      "steps": [
+        {
+          "title": {
+            "zh": "输入任务",
+            "en": "Submit a task"
+          },
+          "body": {
+            "zh": "用客户的语言描述目标和约束。",
+            "en": "Describe the goal and constraints in the customer’s language."
+          }
+        },
+        {
+          "title": {
+            "zh": "组织流程",
+            "en": "Plan the workflow"
+          },
+          "body": {
+            "zh": "解释产品如何组织必要的操作。",
+            "en": "Explain how the product organizes the required actions."
+          }
+        },
+        {
+          "title": {
+            "zh": "执行与验证",
+            "en": "Execute and verify"
+          },
+          "body": {
+            "zh": "显示关键结果和验证依据。",
+            "en": "Show the key results and supporting checks."
+          }
+        },
+        {
+          "title": {
+            "zh": "交付结果",
+            "en": "Deliver the outcome"
+          },
+          "body": {
+            "zh": "回到用户任务，说明完成了什么。",
+            "en": "Return to the user’s task and explain what was achieved."
+          }
+        }
+      ],
+      "result": {
+        "zh": "任务 → 流程 → 结果：用一个例子连接产品能力和客户价值。",
+        "en": "Task → Workflow → Outcome: connect capabilities with customer value through one example."
+      }
+    }
+  ]
+}
