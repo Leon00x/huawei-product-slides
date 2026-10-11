@@ -1,0 +1,54 @@
+{
+  "id": "blank-product-deck",
+  "title": {
+    "zh": "产品名称",
+    "en": "Product name"
+  },
+  "brandLabel": "HUAWEI CLOUD",
+  "footer": "HUAWEI CLOUD",
+  "chapters": [
+    {
+      "label": {
+        "zh": "概览",
+        "en": "Overview"
+      },
+      "section": {
+        "zh": "产品概览",
+        "en": "Product overview"
+      }
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "title": {
+        "zh": "产品名称",
+        "en": "Product name"
+      },
+      "eyebrow": {
+        "zh": "企业产品介绍",
+        "en": "Enterprise product briefing"
+      },
+      "subtitle": {
+        "zh": "一句话介绍你的产品",
+        "en": "Introduce your product in one sentence"
+      },
+      "tagline": "HUAWEI CLOUD",
+      "background": "云山"
+    },
+    {
+      "type": "custom",
+      "section": {
+        "zh": "产品概览",
+        "en": "Product overview"
+      },
+      "title": {
+        "zh": "页面标题",
+        "en": "Slide title"
+      },
+      "subtitle": "",
+      "eyebrow": "PRODUCT BRIEFING",
+      "fragment": "content/blank.html"
+    }
+  ]
+}

@@ -25,7 +25,7 @@ Agent 会整理内容、选择布局、生成演示并检查。只有内容变�
 手动初始化：
 
 ```sh
-python3 scripts/init.py /path/to/new-product-deck --id new-product-deck --title '产品 X 介绍' --title-en 'Product X briefing'
+python3 scripts/init.py /path/to/new-product-deck --id new-product-deck --title '产品 X 介绍' --title-en 'Product X briefing' --starter blank
 cd /path/to/new-product-deck
 npm run build
 ```
@@ -37,3 +37,13 @@ npm run build
 产物为 HTML 演示、离线单文件、可打印 PDF 与 Cloudflare/Sites 部署代码。部署授权和新项目访问 PIN 由当前会话提供；不把账号凭据打包。华为品牌图片来自当前用户仓库，随模板保存，资产来源见 ASSETS.md。
 
 可选组件也不包含原演示的模型价格、套餐容量、性能指标、业务翻译字典或项目二维码。真实 API 控制台与代理保留为可选华为云集成，不包含模型、端点默认值或 Key。
+
+## 可直接打开的两页 Demo
+
+在线预览：[封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/)。
+
+`demo/index.html` 是完整离线网页：云山封面＋空白内容页，保留翻页、目录、全屏和中英切换。双击即可打开，不需要安装依赖。空白页只有品牌、页标题和页脚，正文没有占位方框。
+
+`--starter blank` 创建相同结构的可编辑项目；默认 `--starter examples` 保留六页组件示例。新增内容可修改 deck.json 或 content/blank.html。
+
+重新生成 Demo：`python3 scripts/build-demo.py`。演示站只发布这两页通用模板，不包含业务内容；正式产品部署继续使用模板内的 PIN 门禁。

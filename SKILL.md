@@ -11,7 +11,7 @@ description: Create or update Huawei-branded bilingual HTML product presentation
 
 1. 第一次使用时告诉用户正在使用本 skill。读取 [设计规范](references/design.md)、[内容与组件](references/content-and-components.md)。需要发布时再读 [部署流程](references/deployment.md)。
 2. 从上下文获取产品名、受众、核心信息、语言和现有素材。能合理推断就继续，不要要求用户配置 CSS、组件或构建。内容不完整时先做明确占位的草稿，不编造价格、指标、可用性或功能。
-3. 新产品使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <产品标题>`。脚本复制完整可运行基础代码；不从原演示仓库动态下载依赖。更新已使用该 skill 的项目时继续其目录，不重新初始化覆盖文件。
+3. 新产品使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <产品标题> --starter blank`。`--starter blank` 提供封面＋空白内容页；需要组件示例时用 `--starter examples`。脚本复制完整可运行基础代码；不从原演示仓库动态下载依赖。更新已使用该 skill 的项目时继续其目录，不重新初始化覆盖文件。
 4. 主要修改新项目 `content/deck.json`。以受众任务和客户价值组织内容，每页一个重点；选择合适的布局。生成文件 `index.html`、`js/config.js`、`js/translations.js` 会重建，业务内容不能直接写在它们里面。
 5. 中英文用 `{ "zh": "中文", "en": "English" }`；英文表达允许调整句式以便阅读。公共骨架一致，英文样式在 `css/english.css` 单独适配。长文案先精简或拆页，不用过小字号压入方框。
 6. 从模板现有组件开始；自定义内容使用 `custom` 片段。复杂交互需要时参考 `assets/recipes/`，示例仅包含通用占位内容。价格、指标、套餐容量和案例必须由当前项目提供，不能沿用旧演示事实。按需引入控制器。

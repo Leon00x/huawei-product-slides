@@ -18,7 +18,12 @@ test('content determines page count, references and isolated storage keys',async
 test('offline bundle contains all runtime code and local images',async()=>{
  const html=await readFile('dist/offline/presentation.html','utf8');
  assert.ok(html.includes('global.DeckNavigation'));assert.ok(html.includes('window.DeckConfig'));assert.ok(html.includes('window.DeckI18n'));
- assert.ok(html.includes('data:image/png;base64,'));assert.ok(html.includes('data:image/jpeg;base64,'));
+ assert.ok(html.includes('data:image/png;base64,'));const deck=JSON.parse(await readFile('content/deck.json','utf8'));
+ const backgrounds={'原山景':'mountains.jpg','云山':'yunshan.png','金沙':'jinsha.png'};
+ for(const cover of deck.slides.filter(s=>s.type==='cover')) {
+  const image=await readFile(path.join('assets',backgrounds[cover.background||'原山景']));
+  assert.ok(html.includes(image.toString('base64')), 'selected cover image must be embedded');
+ }
  assert.ok(!/<script[^>]+src="js\//.test(html));assert.ok(!/<link rel="stylesheet" href="css\//.test(html));
  assert.ok(!/assets\/[A-Za-z0-9_-]+\.(png|jpg|svg)/.test(html));
 });
