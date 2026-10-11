@@ -60,25 +60,18 @@
 {"type":"custom","title":{"zh":"自定义图示","en":"Custom diagram"},"fragment":"content/new-diagram.html","translations":{"某节点":"A node"}}
 ```
 
-## 高级示例代码 assets/recipes
+## 可选组件 assets/recipes
 
-这些是原演示中已经工作的实现，作为按需参考材料保存，不是默认依赖，也不是新产品内容来源。
+全部业务内容由当前项目提供，包内没有模型清单、价格、套餐容量、性能指标或旧项目二维码。
 
-- examples.html：MaaS 实时调用、代码索引、企业知识库、Agent Team、SDD/Vibe 实例、ChatBI 架构与项目 QR、运维场景的页面示例。
-- index-demo.js / knowledge-demo.js：代码与知识检索流程组件。
-- development-case.js：双列过程对比、spec/design/tasks、图表反馈与验收；保留暂停/重播/完整展示和生命周期。
-- ops-demo.js：手动场景选择 + 编排流程轻量高亮，适合多场景 Demo；不自动轮换场景。
-- presentation-scenes.js：场景调度、目录完整预览与项目 QR 弹窗。引入前检查所有选择器和 DOM 约定，避免与基础 scenes.js 的预览钩子互相覆盖。
-- original-app.js：原模型价格卡片、峰谷价和输入/缓存输入/输出列的渲染参考。只提取需要的函数，不替换通用 app.js。
-- maas-data.js / maas-stream.js / maas-console.js：旧模型数据、流式响应解析、实时 API 控制台。旧数据必须替换，不自动保留模型或价格。
-- deploy/shared/maas-proxy.mjs：原流式 API 请求校验和代理。仅真实 API Demo 需要；若启用，在 worker 中经 PIN 检查后接入，并按新服务调整端点和参数限制。
-- original-translations.js：原高级示例的双语文字参考。摘取实际复用的文案，替换旧产品内容。
-- content.css / revision.css / english.css：高级组件原样式。摘取组件所需规则，避免把整个历史修订文件覆盖到新模板。
-- assets/：可选的对应产品图标和场景图。
+- examples.html：通用定价容器、步骤流程和手动场景切换的 DOM 示例；所有正文都是占位文字。
+- pricing-table.js：调用 `DeckPricing.render(container, rows, labels)`。rows 使用 name/input/cacheInput/output；有缓存输入时在 input 右侧增加同字号列，没有缓存输入时省略该列。数值和单位由调用者提供，缺失值显示破折号。
+- scene-controller.js：步骤高亮、暂停、重播、完整显示、离页停止、减少动态效果和打印完整展示。与模板 js/scenes.js 使用相同契约，只加载其中一个。可用于代码检索、知识检索、角色协作和双列案例，具体步骤来自当前内容。
+- scenario-switcher.js：按 data-ops-choice/data-ops-panel 对应值手动切换场景，不自动轮换；流程动效另用 scene-controller.js。
+- recipes.css：通用价格表和场景切换样式；基础流程样式仍来自模板 components.css。
+- maas-stream.js / maas-console.js / deploy/shared/maas-proxy.mjs：可选的华为云 OpenAI 兼容流式 API 集成。没有默认模型、价格或 API Key；保留官方端点白名单。纯内容演示无需加载。启用时补全控制台 DOM、双语文字，并在 Worker 中经 PIN 检查后接入代理。
 
-复杂示例含原业务文本和原选择器；迁移时核对 DOM、图片、字典、脚本加载顺序、场景钩子与打印逻辑。不能把参考文件直接整体加载就宣称跨产品复用完成。
-
-真实 API Key 由演示者输入，不写入内容、源码、离线文件或部署配置。纯内容演示不需要 API 代理。示例来源和指标核对写入新项目内部 docs/content-sources.md。
+真实 API Key 由演示者输入，不写入源码、内容、离线文件或部署配置。内部来源与核对记录写入新项目 docs/content-sources.md。
 
 ## 可选封面背景
 

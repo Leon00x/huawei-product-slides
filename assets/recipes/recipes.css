@@ -1,0 +1,10 @@
+/* Only reusable component geometry; product content lives in the deck. */
+.recipe-pricing {width:100%;border-collapse:collapse;font-size:24px;line-height:1.45}
+.recipe-pricing th,.recipe-pricing td {padding:18px 22px;border-bottom:1px solid #e7e9ed;text-align:left;overflow-wrap:anywhere}
+.recipe-pricing thead {background:#f5f6f8}
+.recipe-pricing tbody th {font-weight:600}
+.recipe-scenarios {display:grid;grid-template-columns:280px 1fr;gap:28px}
+.recipe-scenarios button {display:block;width:100%;padding:18px;border:1px solid #e7e9ed;background:white;color:#252830;font:inherit;text-align:left;cursor:pointer}
+.recipe-scenarios button[aria-pressed="true"] {border-color:#c7000b;color:#c7000b}
+.recipe-scenarios [hidden] {display:none}
+@media print {.recipe-scenarios {display:block}.recipe-scenarios nav {display:none}.recipe-scenarios [hidden] {display:block}}
