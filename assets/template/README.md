@@ -54,3 +54,9 @@ npx wrangler deploy --config deploy/cloudflare/wrangler.json
 ## Sites
 
 `npm run build:sites` 输出 `deploy/chatgpt-sites/dist/server/index.js`，包含 PIN 处理和内嵌网页。实际发布需当前环境的 Sites 工具和新项目的托管配置，并设置 `ACCESS_PIN`。构建脚本不登录、不发布，也不生成虚构的托管清单。
+
+## 选择演示页面
+
+在目录点击“屏蔽页面”，勾选不演示的页面后保存。选择只影响当前浏览器的当前演示项目，刷新后保留；支持取消、恢复全部，至少保留一页。导航和打印跳过屏蔽页，正文仍可编辑。页面 id 由生成器自动补全，也可在 deck.json 显式指定；已有 id 在改标题或排序时保持不变。
+
+`npm run test:visibility` 检查目录选择和项目隔离，需要 Playwright 与本地预览地址。

@@ -1,0 +1,64 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+(async()=>{
+ const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{})});
+ try{
+  const url=process.env.DECK_URL||'http://127.0.0.1:8798/index.html';
+  const context=await browser.newContext({viewport:{width:1366,height:768}});
+  const page=await context.newPage(),errors=[],writes=[];
+  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(r.method()==='POST')writes.push(r.url());});
+  await page.goto(url+'?lang=zh#slide=1');await page.evaluate(()=>document.fonts.ready);
+  const config=await page.evaluate(()=>DeckConfig);
+  const ids=await page.locator('#deck>.slide').evaluateAll(slides=>slides.map(s=>s.dataset.slideId));
+  assert.ok(ids.length>=2);assert.equal(new Set(ids).size,ids.length);
+  const key=config.id+'-hidden-pages-v1',last=ids.length-1;
+  const card=i=>page.locator(`#overview-grid [data-index="${i}"]`);
+  const active=()=>page.locator('#deck>.active').getAttribute('data-slide-id');
+  const stored=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  const open=async()=>{await page.keyboard.press('g');await page.waitForFunction(()=>document.getElementById('overview-dialog').open);};
+  const edit=async()=>{await open();await page.locator('#overview-manage').click();};
+  fs.mkdirSync('qa',{recursive:true});
+  await page.evaluate(n=>location.hash='#slide='+n,ids.length);await page.waitForTimeout(100);
+  await edit();await card(last).click();assert.equal(await active(),ids[last],'Draft choices do not affect the active page');
+  await page.screenshot({path:'qa/visibility-zh.png'});await page.locator('#overview-save').click();
+  assert.equal(await active(),ids[last-1]);assert.deepEqual((await stored()).hidden,[ids[last]]);
+  await page.reload();assert.equal(await active(),ids[last-1]);
+  await page.evaluate(n=>location.hash='#slide='+n,ids.length);await page.waitForTimeout(80);assert.equal(await active(),ids[last-1]);
+  await open();assert.equal(await card(last).isDisabled(),true);assert.equal(await page.locator('#overview-grid>.thumbnail').count(),ids.length);await page.keyboard.press('Escape');
+  const committed=(await stored()).hidden;
+  await edit();await card(0).click();await page.locator('#overview-cancel').click();assert.deepEqual((await stored()).hidden,committed);
+  await page.locator('#overview-manage').click();await card(0).click();await page.keyboard.press('Escape');assert.deepEqual((await stored()).hidden,committed);
+  await page.emulateMedia({media:'print'});
+  assert.equal(await page.locator('#deck>.slide').evaluateAll(slides=>slides.filter(s=>getComputedStyle(s).display!=='none').length),ids.length-1);
+  assert.equal(await page.locator('#deck>.presentation-last').getAttribute('data-slide-id'),ids[last-1]);await page.emulateMedia({media:'screen'});
+  // Different products at the same origin have identical page IDs but separate settings.
+  const otherProject=await context.newPage();
+  await otherProject.addInitScript(otherId=>Object.defineProperty(window,'DeckConfig',{configurable:true,set(value){value.id=otherId;Object.defineProperty(window,'DeckConfig',{value,writable:true,configurable:true});}}),config.id+'-other');
+  await otherProject.goto(url+'#slide='+ids.length);
+  assert.equal(await otherProject.locator('#deck>.active').getAttribute('data-slide-id'),ids[last]);
+  assert.equal(await otherProject.evaluate(id=>localStorage.getItem(id+'-hidden-pages-v1'),config.id+'-other'),null);
+  await otherProject.close();
+  const independent=await browser.newContext();const other=await independent.newPage();await other.goto(url+'#slide='+ids.length);
+  assert.equal(await other.locator('#deck>.active').getAttribute('data-slide-id'),ids[last]);assert.equal(await other.evaluate(key=>localStorage.getItem(key),key),null);await independent.close();
+  // Every page can be selected as a draft, but an empty presentation cannot be saved.
+  await edit();await page.locator('#overview-restore').click();for(let i=0;i<ids.length;i++)await card(i).click();
+  assert.equal(await page.locator('#overview-save').isDisabled(),true);assert.equal(await page.locator('#overview-settings-error').isVisible(),true);
+  await page.locator('#overview-restore').click();await page.locator('#overview-save').click();assert.deepEqual((await stored()).hidden,[]);
+  await page.keyboard.press('Home');assert.equal(await active(),ids[0]);await page.keyboard.press('End');assert.equal(await active(),ids[last]);
+  assert.equal(await page.locator('#progress').evaluate(e=>e.style.width),'100%');
+  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>DeckI18n.setLanguage('en'));
+  await edit();await card(last).click();assert.equal(await card(last).evaluate(e=>e===document.activeElement),true);
+  assert.equal(await page.locator('#overview-save').innerText(),'Save');assert.match(await card(last).locator('.thumbnail-selection').innerText(),/Hidden/);
+  await page.evaluate(()=>DeckI18n.setLanguage('zh'));assert.match(await card(last).locator('.thumbnail-selection').innerText(),/不演示/);
+  await page.evaluate(()=>DeckI18n.setLanguage('en'));await page.screenshot({path:'qa/visibility-en-mobile.png'});await page.locator('#overview-save').click();
+  const sibling=await context.newPage();await sibling.goto(url+'#slide='+ids.length);assert.equal(await sibling.locator('#deck>.active').getAttribute('data-slide-id'),ids[last-1]);
+  await sibling.evaluate(key=>localStorage.setItem(key,JSON.stringify({version:1,hidden:[]})),key);
+  await page.waitForFunction(()=>document.querySelectorAll('#deck>.is-skipped').length===0);await sibling.close();
+  assert.deepEqual(errors,[]);assert.deepEqual(writes,[]);await context.close();
+  const denied=await browser.newContext();await denied.addInitScript(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(name,value){if(name.endsWith('-hidden-pages-v1'))throw new DOMException('Denied','SecurityError');return original.call(this,name,value)};});
+  const deniedPage=await denied.newPage();await deniedPage.goto(url+'?lang=zh#slide=1');await deniedPage.keyboard.press('g');await deniedPage.locator('#overview-manage').click();await deniedPage.locator('#overview-grid [data-index="0"]').click();await deniedPage.locator('#overview-save').click();
+  assert.match(await deniedPage.locator('#toast').innerText(),/本次会话/);assert.equal(await deniedPage.locator('#deck>.active').getAttribute('data-slide-id'),ids[1]);await denied.close();
+  console.log(`PASS: ${ids.length} slides; local selection, navigation, save/reload, cancel/restore, minimum one page, project/browser isolation, English/mobile, print and storage denial`);
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1)});

@@ -29,3 +29,45 @@ test('page boundaries remain stable and jumps reveal the complete page', () => {
   d.jump(2); d.next(); assert.equal(d.index, 2);
   d.jump(100); assert.equal(d.index, 2);
 });
+
+test('hidden pages are skipped in both directions while visible steps still work', () => {
+  const d = ctx.DeckNavigation.create([0,2,0,0,1],[1,3]);
+  d.next(); assert.equal(d.index,2);
+  d.next(); assert.equal(d.index,4); assert.equal(d.step,0);
+  assert.equal(d.canNext(),true); d.next(); assert.equal(d.step,1);
+  assert.equal(d.canNext(),false);
+  d.previous(); assert.equal(d.step,0); d.previous(); assert.equal(d.index,2);
+  d.previous(); assert.equal(d.index,0); assert.equal(d.canPrevious(),false);
+});
+
+test('hiding the current page chooses the next visible page or the last visible page', () => {
+  const d = ctx.DeckNavigation.create([0,2,0,1]);
+  d.jump(1); assert.equal(d.step,2);
+  assert.equal(d.setHidden([1,2]),true); assert.equal(d.index,3); assert.equal(d.step,0);
+  d.setHidden([1,2,3]); assert.equal(d.index,0); assert.equal(d.step,0);
+});
+
+test('hidden direct links resolve to a visible page and hidden edges remain bounded', () => {
+  const d = ctx.DeckNavigation.create([0,0,2,0,0],[0,1,4]);
+  assert.equal(d.index,2);
+  d.jump(0); assert.equal(d.index,2); assert.equal(d.step,2);
+  d.jump(4); assert.equal(d.index,3);
+  d.next(); assert.equal(d.index,3);
+  d.jump(2,false); d.previous(); assert.equal(d.index,2);
+});
+
+test('visibility changes cannot hide every page and corrupt preferences fail open to all pages', () => {
+  const d = ctx.DeckNavigation.create([0,0],[0]);
+  assert.equal(d.setHidden([0,1]),false); assert.deepEqual([...d.visibleIndices],[1]);
+  const corrupt = ctx.DeckNavigation.create([0,0],[0,1]);
+  assert.deepEqual([...corrupt.visibleIndices],[0,1]);
+  const invalid = ctx.DeckNavigation.create([0,0],[false,-1,2,'0',null,Infinity]);
+  assert.deepEqual([...invalid.visibleIndices],[0,1]);
+});
+
+test('restoring pages preserves the current page and makes the restored pages navigable', () => {
+  const d = ctx.DeckNavigation.create([0,0,0],[1]);
+  d.next(); assert.equal(d.index,2);
+  assert.equal(d.setHidden([]),true); assert.equal(d.index,2);
+  d.previous(); assert.equal(d.index,1);
+});

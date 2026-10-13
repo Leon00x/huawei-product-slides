@@ -14,8 +14,8 @@ description: Create or update Huawei-branded bilingual HTML product presentation
 3. 新产品使用独立目录和唯一项目 ID。执行 `python3 <skill根目录>/scripts/init.py <新项目目录> --id <唯一slug> --title <产品标题> --starter blank`。`--starter blank` 提供封面＋空白内容页；需要组件示例时用 `--starter examples`。脚本复制完整可运行基础代码；不从原演示仓库动态下载依赖。更新已使用该 skill 的项目时继续其目录，不重新初始化覆盖文件。
 4. 主要修改新项目 `content/deck.json`。以受众任务和客户价值组织内容，每页一个重点；选择合适的布局。生成文件 `index.html`、`js/config.js`、`js/translations.js` 会重建，业务内容不能直接写在它们里面。
 5. 中英文用 `{ "zh": "中文", "en": "English" }`；英文表达允许调整句式以便阅读。公共骨架一致，英文样式在 `css/english.css` 单独适配。长文案先精简或拆页，不用过小字号压入方框。
-6. 从模板现有组件开始；自定义内容使用 `custom` 片段。复杂交互需要时参考 `assets/recipes/`，示例仅包含通用占位内容。价格、指标、套餐容量和案例必须由当前项目提供，不能沿用旧演示事实。按需引入控制器。
-7. 执行 `npm run build` 和 `npm test`，通过本地 HTTP 服务运行 `npm run test:browser`。参考 [检查与交付](references/validation.md)，查看双语截图，修复文本超出、组件重叠和页脚距离。默认流程动效在进入页时运行，支持暂停、重播、完整显示；离页停止，目录与打印显示完整内容，尊重减少动态效果设置。
+6. 从模板现有组件开始；自定义内容使用 `custom` 片段。复杂交互需要时参考 `assets/recipes/`，示例仅包含通用占位内容。价格、指标、套餐容量和案例使用当前项目资料。按需引入控制器。
+7. 执行 `npm run build` 和 `npm test`，通过本地 HTTP 服务运行 `npm run test:browser`。参考 [检查与交付](references/validation.md)，查看双语截图，修复文本超出、组件重叠和页脚距离。目录支持选择屏蔽页面并保存到当前浏览器，按项目 ID 隔离；所有翻页和章节跳转跳过屏蔽页，至少保留一页。页面 id 保持稳定，已有页面改标题或排序时不要修改 id。默认流程动效在进入页时运行，支持暂停、重播、完整显示；离页停止，目录与打印显示完整内容，尊重减少动态效果设置。
 8. 交付项目和离线 HTML。用户要求发布且已有授权时，使用新项目的配置发布并验证访问页；没有部署要求时只构建可发布产物。复用已有认证，不复制账号配置、OAuth、访问 PIN 或 API Key 到包内。
 
 ## 设计默认值

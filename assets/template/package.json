@@ -14,6 +14,7 @@
     "dev:cloudflare": "npm run build:cloudflare && npx wrangler dev --config deploy/cloudflare/wrangler.json",
     "deploy:cloudflare": "npm run build:cloudflare && npx wrangler deploy --config deploy/cloudflare/wrangler.json",
     "test": "node --test tests/navigation.test.cjs tests/access-gate.test.mjs tests/build.test.mjs",
-    "test:browser": "node tests/browser-check.cjs"
+    "test:browser": "node tests/browser-check.cjs",
+    "test:visibility": "node tests/visibility-check.cjs"
   }
 }

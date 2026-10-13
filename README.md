@@ -1,49 +1,128 @@
-# huawei-product-slides
+# Huawei Product Slides
 
-可复用的华为风格产品演示 skill。包含实际基础代码、品牌素材、内容生成器、可选高级组件和发布流程。
+**制作华为风格 HTML 产品演示的 Agent Skill。** 你提供产品内容，Agent 负责组织章节、选择版式、生成中英双语页面、配置轻量动效、检查排版并构建交付文件。
 
-```text
-huawei-product-slides/
-├── SKILL.md                 制作流程与 Agent 指令
-├── references/              风格、内容格式、组件、部署、验证
-├── scripts/init.py          创建独立演示项目
-└── assets/
-    ├── template/            可独立运行的基础项目
-    └── recipes/             通用交互、定价表与 API 集成参考代码
-```
+适用于产品介绍、技术架构、方案对比、套餐说明、业务案例和 Demo 分享。
+
+[在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/)
+
+## 能做出什么
+
+| 产物 | 使用方式 |
+| --- | --- |
+| 交互式 HTML 演示 | 浏览器打开，支持翻页、目录、语言切换与全屏 |
+| 离线单文件 HTML | 图片、样式和脚本内嵌，可保存后直接打开 |
+| PDF | 浏览器打印，保留完整静态内容 |
+| 可编辑项目源码 | 内容、组件、样式和部署配置分别维护 |
+| 在线演示站点 | 使用 Cloudflare Workers 或 Sites ESM Worker 发布 |
+
+## 功能
+
+- **品牌与排版**：华为 Logo、白底与红色强调、16:9 画布、统一页头页脚；可选择云山、金沙和山景封面。
+- **九类页面**：封面、卡片、指标、分层架构、双列对比、表格、流程、图片及自定义页面。
+- **中英双语**：一键切换、英文独立样式、语言偏好记忆，支持双语目录和控件。
+- **演示操作**：键盘翻页、手机滑动、全屏、章节跳转、缩略图目录、页码链接和阅读位置记忆。
+- **屏蔽页面**：目录中选择不演示的页面并保存，翻页和章节跳转自动跳过；支持取消与恢复全部。设置按演示项目保存在当前浏览器，至少保留一页。
+- **轻量动效**：流程自动高亮、暂停、重播和完整显示；离页停止，打印与减少动态效果时完整展示。
+- **可选交互组件**：手动场景切换、输入/缓存输入/输出价格表，以及华为云 OpenAI 兼容流式 API 控制台与代理。
+- **访问保护**：在线产品项目使用服务端 PIN 校验与登录 Cookie，保护网页和静态资源。
+- **质量检查**：双语文字溢出、正文与页脚间距、目录跳转、动效、离线资源和访问控制测试。
+
+自定义图示和真实 API Demo 可以扩展组件。部署需要对应平台授权；API Demo 需要提供服务地址、模型与 API Key。
 
 ## 安装
 
-将整个 huawei-product-slides 文件夹放入当前 Agent 支持的技能目录，保留 SKILL.md 和相对目录。Codex 用户级目录通常为 `$HOME/.agents/skills/huawei-product-slides/`；项目级可用 `<项目>/.agents/skills/huawei-product-slides/`，以当前客户端的技能发现方式为准。安装后重新载入会话并确认技能可见。本次交付是可安装包，没有自动写入全局技能目录。
+将整个仓库放入 Agent 支持的技能目录，保留 `SKILL.md` 和相对目录结构。
 
-## 使用
-
-> 使用 $huawei-product-slides，帮我做产品 X 的介绍，沿用华为 Logo、排版和轻量动效。面向企业客户，内容如下……中英双语。
-
-Agent 会整理内容、选择布局、生成演示并检查。只有内容变更时，修改 content/deck.json 即可；新图示或真实交互可扩展组件。
-
-手动初始化：
+Codex 用户级安装示例：
 
 ```sh
-python3 scripts/init.py /path/to/new-product-deck --id new-product-deck --title '产品 X 介绍' --title-en 'Product X briefing' --starter blank
-cd /path/to/new-product-deck
-npm run build
+git clone https://github.com/Leon00x/huawei-product-slides.git ~/.agents/skills/huawei-product-slides
 ```
 
-可选封面素材已加入 **云山**（第一轮图二）和 **金沙**（沙漠背景），用户说名字即可选用。
+也可安装到项目的 `.agents/skills/huawei-product-slides/`。重新载入会话后，确认 `$huawei-product-slides` 可见。
 
-基础包自带六页占位示例，体现封面、卡片、架构、对比、定价表和自动流程。不会自动继承当前 AI 演示的价格、产品指标或部署地址。
+## 使用 Skill
 
-产物为 HTML 演示、离线单文件、可打印 PDF 与 Cloudflare/Sites 部署代码。部署授权和新项目访问 PIN 由当前会话提供；不把账号凭据打包。华为品牌图片来自当前用户仓库，随模板保存，资产来源见 ASSETS.md。
+直接向 Agent 提供内容即可：
 
-可选组件也不包含原演示的模型价格、套餐容量、性能指标、业务翻译字典或项目二维码。真实 API 控制台与代理保留为可选华为云集成，不包含模型、端点默认值或 Key。
+> 使用 $huawei-product-slides，为产品 X 制作企业客户介绍。包含定位、三项优势、架构、套餐和一个业务案例。中英双语，封面用云山。
 
-## 可直接打开的两页 Demo
+可以继续提出页面调整、动画、图片或部署要求。Agent 根据内容生成项目，并执行排版和交互检查。
 
-在线预览：[封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/)。
+## 手动创建项目
 
-`demo/index.html` 是完整离线网页：云山封面＋空白内容页，保留翻页、目录、全屏和中英切换。双击即可打开，不需要安装依赖。空白页只有品牌、页标题和页脚，正文没有占位方框。
+需要 Node.js 20+ 和 Python 3。基础生成与构建无需安装 npm 依赖。
 
-`--starter blank` 创建相同结构的可编辑项目；默认 `--starter examples` 保留六页组件示例。新增内容可修改 deck.json 或 content/blank.html。
+在技能仓库目录执行：
 
-重新生成 Demo：`python3 scripts/build-demo.py`。演示站只发布这两页通用模板，不包含业务内容；正式产品部署继续使用模板内的 PIN 门禁。
+```sh
+python3 scripts/init.py /path/to/my-product-deck \
+  --id my-product-deck \
+  --title '产品 X 介绍' \
+  --title-en 'Product X briefing' \
+  --starter blank
+
+cd /path/to/my-product-deck
+npm run build
+npm test
+```
+
+| 起始模板 | 内容 |
+| --- | --- |
+| `--starter blank` | 封面＋空白内容页，适合从自己的内容开始 |
+| `--starter examples` | 六页组件示例，适合了解布局与流程组件 |
+
+主要编辑 `content/deck.json`，填入页面标题、正文及双语文本；自定义页面使用 `content/*.html`。生成器负责页码、目录、语言字典和页面骨架。字段与组件示例见 [内容与组件](references/content-and-components.md)。
+
+本地预览：
+
+```sh
+python3 -m http.server 8798 --bind 127.0.0.1
+```
+
+然后在浏览器打开 `http://127.0.0.1:8798/index.html`。
+
+## 选择本次演示的页面
+
+1. 打开目录，点击 **屏蔽页面**。
+2. 勾选不演示的页面，点击 **保存**。
+3. 需要恢复时，再进入该模式取消勾选，或点击 **恢复全部**后保存。
+
+刷新后仍保留选择。取消、Esc 或关闭目录会放弃未保存的修改。屏蔽页保留在目录里，可随时恢复；当前浏览器打印/PDF 也会跳过它们。
+
+选择存于浏览器本地，以项目 ID 隔离。页面有稳定 ID，调整顺序或修改标题不会改变屏蔽对象。设置不跨浏览器、设备或域名同步。
+
+## 构建与发布
+
+| 命令 | 输出 |
+| --- | --- |
+| `npm run build` | 生成网页、Cloudflare 静态资源与离线 HTML |
+| `npm run build:offline` | `dist/offline/presentation.html` |
+| `npm run build:cloudflare` | `deploy/cloudflare/dist/public/` |
+| `npm run build:sites` | Sites ESM Worker |
+| `npm run deploy:cloudflare` | 发布当前项目到 Cloudflare |
+| `npm run test:browser` | 浏览器检查、截图与 PDF，需要 Playwright 和浏览器 |
+
+Cloudflare 项目需要配置平台授权和 `ACCESS_PIN`。离线文件与纯静态预览可直接打开。详细步骤见 [部署流程](references/deployment.md) 和 [检查与交付](references/validation.md)。
+
+## Demo 与目录结构
+
+`demo/index.html` 是可直接打开的两页离线演示。重新生成：
+
+```sh
+python3 scripts/build-demo.py
+```
+
+```text
+huawei-product-slides/
+├── SKILL.md               Agent 制作流程
+├── README.md              安装、功能与使用方法
+├── references/            设计、内容、部署与验证说明
+├── scripts/               项目初始化、Demo 构建与源码审计
+├── assets/
+│   ├── template/          完整演示项目模板
+│   ├── starters/          起始页面配置
+│   └── recipes/           可选交互组件
+└── demo/                  可直接打开的演示与预览部署配置
+```

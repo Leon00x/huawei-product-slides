@@ -23,3 +23,5 @@ DECK_URL=http://127.0.0.1:8798/index.html node tests/browser-check.cjs
 - 可选高级组件加入后，针对新增结构补充检查，特别是 SVG 长词、隐藏面板、缩略图和打印完整态。
 
 交付包含项目源文件、内容输入、离线 HTML、内部来源记录和验证说明。PDF 不保留交互。skill 包不包含运行依赖、OAuth、Cloudflare account_id、访问 PIN、API Key、浏览器 Cookie 或原站点配置。
+
+页面选择检查：`npm run test:visibility`，同样需要 Playwright、本地 HTTP 服务和 DECK_URL。覆盖本地保存、刷新、双语往返、手机控件、取消与恢复、最少一页、目录/章节/直接链接、打印及同源项目隔离。

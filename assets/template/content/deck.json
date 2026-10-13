@@ -63,7 +63,8 @@
         "zh": "一句话说明面向谁、解决什么问题",
         "en": "Describe who the product serves and which problem it solves"
       },
-      "tagline": "HUAWEI CLOUD"
+      "tagline": "HUAWEI CLOUD",
+      "id": "cover"
     },
     {
       "type": "cards",
@@ -110,7 +111,8 @@
             "en": "Describe integration, management and governance for your target customers."
           }
         }
-      ]
+      ],
+      "id": "values"
     },
     {
       "type": "architecture",
@@ -179,7 +181,8 @@
             }
           ]
         }
-      ]
+      ],
+      "id": "architecture"
     },
     {
       "type": "comparison",
@@ -246,7 +249,8 @@
             }
           ]
         }
-      ]
+      ],
+      "id": "comparison"
     },
     {
       "type": "table",
@@ -321,7 +325,8 @@
       "note": {
         "zh": "在这里说明用尽套餐后的处理方式；只填已确认的产品规则。",
         "en": "Explain what happens after the allowance is used, based on confirmed product rules."
-      }
+      },
+      "id": "plans"
     },
     {
       "type": "workflow",
@@ -379,7 +384,8 @@
       "result": {
         "zh": "任务 → 流程 → 结果：用一个例子连接产品能力和客户价值。",
         "en": "Task → Workflow → Outcome: connect capabilities with customer value through one example."
-      }
+      },
+      "id": "workflow"
     }
   ]
 }
