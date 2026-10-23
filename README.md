@@ -98,7 +98,7 @@ python3 -m http.server 8798 --bind 127.0.0.1
 
 | 命令 | 输出 |
 | --- | --- |
-| `npm run build` | 生成网页、Cloudflare 静态资源与离线 HTML |
+| `npm run build` | 生成用于预览的多文件网页，不导出、不生成部署产物 |
 | `npm run build:offline` | `dist/offline/presentation.html` |
 | `npm run build:cloudflare` | `deploy/cloudflare/dist/public/` |
 | `npm run build:sites` | Sites ESM Worker |
@@ -108,6 +108,8 @@ python3 -m http.server 8798 --bind 127.0.0.1
 Cloudflare 项目需要配置平台授权和 `ACCESS_PIN`。离线文件与纯静态预览可直接打开。详细步骤见 [部署流程](references/deployment.md) 和 [检查与交付](references/validation.md)。
 
 ## 一键导出，无需 Agent 改代码
+
+制作完成后，Agent 会提示可以导出 PDF 或单文件 HTML。**只有用户明确要求导出时才执行**，默认不生成这两类文件。用户只要求一种格式时，仅导出该格式。
 
 在生成的产品项目目录运行：
 
@@ -127,7 +129,7 @@ npx playwright install chromium
 
 后续只更新内容、执行命令即可。HTML 不需要这些 npm 依赖；PDF 导出自动起停本地服务、完整显示动效内容，并按 16:9 分页。HTML 保留双语切换与交互，PDF 是静态内容。已有 Chromium 可用 `--browser-executable` 或 `BROWSER_EXECUTABLE` 指定。
 
-默认 `npm run build`、导出和 `npm test` 只处理本地文件。部署模板在初始化时提供；日常内容修改无需改动 deploy/。明确需要发布时才执行对应平台的打包和部署命令。
+默认 `npm run build`、`npm test` 和浏览器检查只生成或检查预览网页，不导出单文件 HTML/PDF，也不生成部署产物。导出检查通过显式的 `test:export:html`、`test:export` 执行。部署模板在初始化时提供；日常内容修改无需改动 deploy/。明确需要发布时才执行对应平台的打包和部署命令。
 
 ## Demo 与目录结构
 

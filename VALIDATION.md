@@ -47,3 +47,10 @@
 - 含致谢页的 7 页配置通过真实 CLI 集成导出：单文件 HTML、中文 PDF、英文 PDF，各 PDF 页数均为 7。
 - 默认检查及 HTML/PDF 导出后，隔离项目的 deploy/cloudflare/dist 仍不存在；显式 test:deployment 另行运行，4 项打包及 PIN 检查通过。
 - 来源及凭据审计通过。本次只更新 Skill 源码，不部署 Cloudflare/Sites。
+
+## 2026-10-23：导出改为明确指令触发
+
+- 默认 build 仅生成多文件预览网页；基础测试不再生成离线 HTML，常规浏览器检查不再输出 PDF。
+- 导出相关检查移到显式 test:export:html / test:export；现有导出 CLI 保留。
+- 在全新 blank 项目中初始化、build、15 项基础测试及中英双语/三视口浏览器检查通过；检查后无 dist/offline、dist/exports、PDF 或部署产物。
+- Skill 交付提示加入可选导出说明，明确提示本身不授权执行；仅按用户指定格式导出。本轮未执行演示文件导出或站点发布。

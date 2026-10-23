@@ -7,7 +7,7 @@
   },
   "scripts": {
     "generate": "python3 tools/render.py",
-    "build": "npm run generate && python3 tools/build.py",
+    "build": "npm run generate",
     "build:cloudflare": "npm run generate && node deploy/cloudflare/build.mjs",
     "build:offline": "npm run generate && python3 tools/build.py",
     "build:sites": "npm run generate && python3 deploy/chatgpt-sites/build.py",
@@ -20,6 +20,7 @@
     "export:html": "node tools/export.cjs html",
     "export:pdf": "node tools/export.cjs pdf",
     "test:deployment": "node --test tests/deployment.test.mjs tests/access-gate.test.mjs",
-    "test:export": "node tests/export-check.cjs"
+    "test:export": "npm run test:export:html && node tests/export-check.cjs",
+    "test:export:html": "node --test tests/export.test.mjs"
   }
 }

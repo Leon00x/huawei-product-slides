@@ -71,6 +71,6 @@ const fs=require('node:fs');
  }
  await page.emulateMedia({media:'print'});await page.waitForTimeout(100);
  assert.equal(await page.locator('#deck .flow-current').count(),0);
- await page.pdf({path:'qa/template.pdf',preferCSSPageSize:true,printBackground:true});
+ // Verify print state without creating a PDF; use test:export only when export is requested.
  assert.deepEqual(errors,[]);await browser.close();console.log(`PASS: ${count} slides, 2 languages, 3 viewports, navigation, motion, reduced motion and print`);
 })().catch(e=>{console.error(e);process.exit(1)});
