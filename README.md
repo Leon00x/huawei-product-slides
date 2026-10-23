@@ -4,7 +4,7 @@
 
 适用于产品介绍、技术架构、方案对比、套餐说明、业务案例和 Demo 分享。
 
-[在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/)
+[在线体验：封面＋空白页](https://huawei-product-slides-demo.leonguo08.workers.dev/) · [致谢页预览图](demo/thank-you-preview.png)
 
 ## 能做出什么
 

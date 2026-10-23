@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile,writeFile,access,readdir,mkdtemp,mkdir,rm} from 'node:fs/promises';
+import {readFile,writeFile,access,mkdtemp,mkdir,rm} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import {tmpdir} from 'node:os';

@@ -21,7 +21,7 @@
 4. 设置新项目 `ACCESS_PIN`：`npx wrangler secret put ACCESS_PIN --config deploy/cloudflare/wrangler.json`。已有新项目 Secret 无需重设；未知 PIN 不能沿用猜测值。
 5. 用户已经要求发布时：`npx wrangler deploy --config deploy/cloudflare/wrangler.json`。缺少发布授权时交付构建产物，后续审批针对具体项目和产物；不要反复请求已给出的授权。
 6. 验证匿名访问显示 PIN 页、错误 PIN 被拒绝、已有合法 Cookie 能打开网页。仅有 OAuth 而没有 PIN 时，可以验证访问页和部署成功；明确说明完整登录后验收依赖 PIN，不声称已验证。
-7. 返回部署工具报告的真实地址和版本 ID。自定义域名需要新域名配置 `{ "pattern":"new-domain.example", "custom_domain":true }`，必须确定是本次目标，不把 slides.maaslab.cloud 复制过去。
+7. 返回部署工具报告的真实地址和版本 ID。自定义域名需要新域名配置 `{ "pattern":"new-domain.example", "custom_domain":true }`，域名必须属于本次项目。
 
 GitHub 自动部署使用新项目仓库和分支，构建命令 `npm run build:cloudflare`、部署命令 `npx wrangler deploy --config deploy/cloudflare/wrangler.json`。同一个 Worker 的更新保留已有 Secret。
 
@@ -56,4 +56,4 @@ npm run export -- --lang both --output-dir "dist/my exports" --browser-executabl
 node tools/export.cjs --help
 ```
 
-命令会重新读取 deck.json 并生成页面，再导出。HTML 始终保留中英切换与交互，PDF 为指定语言的完整静态页面，不保留交互；`--lang` 只控制 PDF。CLI 使用独立浏览器上下文，导出 deck.json 中的全部页面，不受日常浏览器屏蔽设置影响。PDF 临时本地服务自动启动和关闭，不需要手动起服务器，也不读取或修改任何托管配置。可通过 BROWSER_EXECUTABLE、PYTHON_EXECUTABLE 指定本机可执行文件。中文 PDF 需要系统有可用中文字体。
+命令会重新读取 deck.json 并生成页面，再导出。HTML 始终保留中英切换与交互，PDF 为指定语言的完整静态页面，不保留交互；致谢页等设计为双语的内容保留其双语版式；`--lang` 只控制 PDF。CLI 使用独立浏览器上下文，导出 deck.json 中的全部页面，不受日常浏览器屏蔽设置影响。PDF 临时本地服务自动启动和关闭，不需要手动起服务器，也不读取或修改任何托管配置。可通过 BROWSER_EXECUTABLE、PYTHON_EXECUTABLE 指定本机可执行文件。中文 PDF 需要系统有可用中文字体。
