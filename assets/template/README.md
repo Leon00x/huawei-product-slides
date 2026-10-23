@@ -1,6 +1,6 @@
 # 华为产品演示模板
 
-这是独立的 HTML 演示项目。默认内容是占位示例，所有产品结论、指标、价格与容量都需要填写。模板没有旧 PPT 的价格、域名、账号、访问 PIN 或 OAuth 配置。
+这是独立的 HTML 演示项目。默认内容是占位示例，所有产品结论、指标、价格与容量都需要填写。可直接生成离线文件；在线发布为独立的可选步骤。
 
 ## 只改内容
 
@@ -20,7 +20,7 @@ python3 -m http.server 8798 --bind 127.0.0.1
 - `index.html`、`js/config.js`、`js/translations.js` 是生成文件；请修改内容文件再生成。
 - 离线文件：`dist/offline/presentation.html`。离线 HTML 本身可直接打开，或通过本地 HTTP 服务预览。
 
-支持 cover/cards/metrics/architecture/comparison/table/workflow/image/custom。不要把业务文案写进公共控制器；新增复杂布局时增加组件或 custom 片段。
+支持 cover/cards/metrics/architecture/comparison/table/workflow/image/custom/closing。closing 提供纯白 Thank You、双语愿景与较大 Huawei Logo。不要把业务文案写进公共控制器；新增复杂布局时增加组件或 custom 片段。
 
 ## 检查
 
@@ -35,6 +35,19 @@ DECK_URL=http://127.0.0.1:8798/index.html npm run test:browser
 ```
 
 可设置 `BROWSER_EXECUTABLE` 指向已有 Chromium。浏览器检查覆盖双语、三种视口、目录、翻页、动效暂停/完整展示、离页停止、减少动态效果和打印。截图及 PDF 输出到 `qa/`。
+
+## 一键导出
+
+```sh
+npm run export:html
+npm run export:pdf -- --lang zh
+npm run export:pdf -- --lang en
+npm run export -- --lang both
+```
+
+文件写入 dist/exports/；`--output-dir "目标目录"` 可改变位置。HTML 保留交互与双语切换；PDF 是指定语言的静态全页内容，忽略日常浏览器中的屏蔽设置。PDF 首次需安装 Playwright 与 Chromium（同浏览器检查），脚本自动启动并关闭本地预览服务，无需 Agent 重写代码。`node tools/export.cjs --help` 查看参数；可使用 BROWSER_EXECUTABLE 指定已有 Chromium，PYTHON_EXECUTABLE 指定 Python。
+
+`npm run build`、导出和默认 npm test 不构建 Cloudflare 目录。仅明确要求发布时执行下面的平台命令；普通内容和样式更新不需要修改部署适配器。平台构建检查另用 npm run test:deployment。
 
 ## Cloudflare
 

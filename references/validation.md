@@ -19,9 +19,11 @@ DECK_URL=http://127.0.0.1:8798/index.html node tests/browser-check.cjs
 - 工作流程支持播放/暂停/重播/完整示意，离开页面停止，打印和减少动态效果模式没有进行中的高亮。
 - PIN 的匿名静态资源访问、错误 PIN、外站 Origin、合法 Cookie、篡改 Cookie、过期 Cookie和缺失 Secret 都有测试。
 - 检查离线 HTML：CSS/JS/图片内嵌；不访问旧产品域名；双语和公共交互可用。
-- 检查 Cloudflare 构建只复制静态资源，不暴露 worker、源码目录、测试或 Secret。
+- 仅在需要发布或修改部署适配器时运行 `npm run test:deployment`，检查 Cloudflare 构建只复制静态资源，不暴露 worker、源码目录、测试或 Secret。
 - 可选高级组件加入后，针对新增结构补充检查，特别是 SVG 长词、隐藏面板、缩略图和打印完整态。
 
 交付包含项目源文件、内容输入、离线 HTML、内部来源记录和验证说明。PDF 不保留交互。skill 包不包含运行依赖、OAuth、Cloudflare account_id、访问 PIN、API Key、浏览器 Cookie 或原站点配置。
 
 页面选择检查：`npm run test:visibility`，同样需要 Playwright、本地 HTTP 服务和 DECK_URL。覆盖本地保存、刷新、双语往返、手机控件、取消与恢复、最少一页、目录/章节/直接链接、打印及同源项目隔离。
+
+导出 CLI 集成检查：安装 Playwright 和 Chromium 后执行 `npm run test:export`，验证单文件 HTML、中文和英文 PDF 页数与内容配置一致。不需要人工修改导出脚本，也不生成 Cloudflare 产物。

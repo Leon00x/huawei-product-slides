@@ -48,6 +48,22 @@ dialog{width:min(1080px,92vw);max-height:90vh;padding:32px;border:0;border-radiu
 
 </style><style>
 /* Generic content components. Typography stays readable; split overloaded pages. */
+/* Closing pages always show both languages, without content-page chrome. */
+.closing-slide{background:#fff}
+.closing-layout{height:100%;display:grid;grid-template-columns:510px minmax(0,1fr);gap:140px;align-items:center;padding:0 36px}
+.closing-greeting{padding-bottom:10px}
+.closing-greeting h1{margin:0;font:400 108px/1.05 Arial,sans-serif;letter-spacing:-3px;color:#292a2d;white-space:nowrap}
+.closing-greeting p{margin:26px 0 0;font-size:38px;line-height:1.4;letter-spacing:8px;color:#c7000b}
+.closing-vision{max-width:650px}
+.closing-vision-label{margin-bottom:28px;font-size:17px;line-height:1.5;letter-spacing:1px;color:#8b8f96}
+.closing-vision-zh{margin:0;font-size:30px;font-weight:400;line-height:1.6;color:#303236;white-space:pre-line}
+.closing-vision-en{margin:22px 0 0;font:400 21px/1.5 Arial,sans-serif;color:#73777d;white-space:pre-line}
+.closing-logo{display:block;width:350px;height:auto;object-fit:contain;margin-top:52px}
+.closing-slide.active [data-closing-motion="fade"] .closing-greeting{animation:closing-in .65s ease-out backwards}
+.closing-slide.active [data-closing-motion="fade"] .closing-vision{animation:closing-in .65s .15s ease-out backwards}
+@keyframes closing-in{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+.thumbnail-preview .closing-slide *{animation:none!important}
+@media print{.closing-slide *{animation:none!important}}
 .kit-body{margin-top:32px;line-height:1.5}.kit-body :is(article,div,aside,h3,p,span){min-width:0}.kit-body h3{font-size:29px;line-height:1.35;margin:0 0 18px}.kit-body p{font-size:22px;color:var(--muted);line-height:1.65;margin:0}.kit-index{display:block;color:var(--red);font:18px Arial;letter-spacing:1px;margin-bottom:26px}
 .kit-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:30px}.kit-card{min-height:330px;background:#f7f7f9;border-top:3px solid var(--red);padding:32px}.kit-card:nth-child(2){background:#fcf0f0}.kit-metrics{display:flex;gap:40px;padding:45px 0}.kit-metrics article{flex:1;padding:20px 0}.kit-metrics article+article{border-left:1px solid var(--line);padding-left:40px}.kit-metrics b{display:block;color:var(--red);font:500 48px/1.4 Arial;margin-bottom:28px}.kit-metrics h3{font-size:25px}
 .kit-layers{display:grid;gap:12px}.kit-layer{display:grid;grid-template-columns:235px minmax(0,1fr);border:1px solid var(--line);background:#f8f8fa;min-height:86px}.kit-layer h3{margin:0;padding:20px 24px;font-size:23px;display:flex;align-items:center;background:#f2eeee;border-left:3px solid var(--red)}.kit-layer>div{display:flex;align-items:stretch;gap:14px;padding:14px}.kit-layer>div>span{flex:1;display:flex;align-items:center;justify-content:center;padding:12px;font-size:21px;text-align:center;background:white;line-height:1.4}
@@ -216,6 +232,7 @@ window.DeckConfig = {"id": "product-slides-demo", "chapters": [{"label": "概览
 
   const chapters = window.DeckConfig.chapters;
   slides.forEach(slide => {
+    if (!slide.querySelector('.slide-header')) return;
     if (slide.classList.contains('cover')) return;
     const nav = document.createElement('nav'); nav.className = 'chapter-nav'; nav.setAttribute('aria-label', '演示章节');
     chapters.forEach(chapter => {

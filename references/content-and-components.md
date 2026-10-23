@@ -39,6 +39,7 @@
 | 类型 | 内容字段 | 容量和用途 |
 | --- | --- | --- |
 | cover | title, eyebrow, subtitle, tagline, background | 产品名称 + 一句话定位；background 可选云山、金沙、原山景 |
+| closing | thanks: {zh,en}, visionLabel, vision: {zh,en}, logo, motion | 纯白致谢页；左侧致谢，右侧中英愿景与较大 Logo；motion 为 fade 或 none |
 | cards | cards: [{title, body}] | 2–4 个价值或能力 |
 | metrics | metrics: [{value, label, body}] | 2–4 个面向客户的指标，写明单位和条件 |
 | architecture | layers: [{label, items: [文字]}] | 3–5 层，每层 1–4 个模块 |
@@ -80,3 +81,9 @@
 ## 演示页面选择
 
 目录 → 屏蔽页面 → 勾选 → 保存。只保存当前项目的页面 ID 到浏览器本地；键为 `<项目id>-hidden-pages-v1`。刷新及同源标签页继续生效，其他项目、浏览器、设备和域名独立。至少保留一页；取消或关闭目录放弃草稿。屏蔽页仍在目录中，支持恢复全部。导航、章节跳转和当前浏览器打印跳过屏蔽页，原稿页码保留。
+
+## 通用致谢页
+
+`type: "closing"` 是无页头、正文标题和页脚的独立收尾布局。左侧默认只显示 Thank You，右侧显示华为愿景的中英文与完整 Huawei Logo；不显示中文“致谢”和愿景小标题，不受语言切换影响。默认只有一次轻微淡入；打印、目录缩略图和减少动态效果时显示完整内容。
+
+可复制 `assets/starters/thank-you.json` 中的 slide 到任意产品的 slides 末尾。thanks、vision 使用 zh/en 两个字符串，非空时同时展示；thanks.zh 默认留空，visionLabel 为可选标题文字且默认留空，logo 为项目 assets 下的本地文件，motion 可设为 none。愿景段落可用 `\n` 控制语义换行，保持人名、组织名称和英文短语完整。页面 id 保持唯一且稳定。

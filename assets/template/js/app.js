@@ -63,6 +63,7 @@
 
   const chapters = window.DeckConfig.chapters;
   slides.forEach(slide => {
+    if (!slide.querySelector('.slide-header')) return;
     if (slide.classList.contains('cover')) return;
     const nav = document.createElement('nav'); nav.className = 'chapter-nav'; nav.setAttribute('aria-label', '演示章节');
     chapters.forEach(chapter => {

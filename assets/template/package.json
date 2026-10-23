@@ -7,7 +7,7 @@
   },
   "scripts": {
     "generate": "python3 tools/render.py",
-    "build": "npm run generate && node deploy/cloudflare/build.mjs && python3 tools/build.py",
+    "build": "npm run generate && python3 tools/build.py",
     "build:cloudflare": "npm run generate && node deploy/cloudflare/build.mjs",
     "build:offline": "npm run generate && python3 tools/build.py",
     "build:sites": "npm run generate && python3 deploy/chatgpt-sites/build.py",
@@ -15,6 +15,11 @@
     "deploy:cloudflare": "npm run build:cloudflare && npx wrangler deploy --config deploy/cloudflare/wrangler.json",
     "test": "node --test tests/navigation.test.cjs tests/access-gate.test.mjs tests/build.test.mjs",
     "test:browser": "node tests/browser-check.cjs",
-    "test:visibility": "node tests/visibility-check.cjs"
+    "test:visibility": "node tests/visibility-check.cjs",
+    "export": "node tools/export.cjs",
+    "export:html": "node tools/export.cjs html",
+    "export:pdf": "node tools/export.cjs pdf",
+    "test:deployment": "node --test tests/deployment.test.mjs tests/access-gate.test.mjs",
+    "test:export": "node tests/export-check.cjs"
   }
 }

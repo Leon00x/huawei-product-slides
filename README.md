@@ -12,20 +12,21 @@
 | --- | --- |
 | 交互式 HTML 演示 | 浏览器打开，支持翻页、目录、语言切换与全屏 |
 | 离线单文件 HTML | 图片、样式和脚本内嵌，可保存后直接打开 |
-| PDF | 浏览器打印，保留完整静态内容 |
+| PDF | 脚本一键导出中文、英文或两份 PDF，保留完整静态内容 |
 | 可编辑项目源码 | 内容、组件、样式和部署配置分别维护 |
 | 在线演示站点 | 使用 Cloudflare Workers 或 Sites ESM Worker 发布 |
 
 ## 功能
 
 - **品牌与排版**：华为 Logo、白底与红色强调、16:9 画布、统一页头页脚；可选择云山、金沙和山景封面。
-- **九类页面**：封面、卡片、指标、分层架构、双列对比、表格、流程、图片及自定义页面。
+- **十类页面**：封面、卡片、指标、分层架构、双列对比、表格、流程、图片、自定义页面及致谢页。
 - **中英双语**：一键切换、英文独立样式、语言偏好记忆，支持双语目录和控件。
 - **演示操作**：键盘翻页、手机滑动、全屏、章节跳转、缩略图目录、页码链接和阅读位置记忆。
 - **屏蔽页面**：目录中选择不演示的页面并保存，翻页和章节跳转自动跳过；支持取消与恢复全部。设置按演示项目保存在当前浏览器，至少保留一页。
 - **轻量动效**：流程自动高亮、暂停、重播和完整显示；离页停止，打印与减少动态效果时完整展示。
 - **可选交互组件**：手动场景切换、输入/缓存输入/输出价格表，以及华为云 OpenAI 兼容流式 API 控制台与代理。
 - **访问保护**：在线产品项目使用服务端 PIN 校验与登录 Cookie，保护网页和静态资源。
+- **一键导出**：CLI 直接生成单文件 HTML 和中英 PDF；支持指定输出目录，无需 Agent 逐次修改脚本。
 - **质量检查**：双语文字溢出、正文与页脚间距、目录跳转、动效、离线资源和访问控制测试。
 
 自定义图示和真实 API Demo 可以扩展组件。部署需要对应平台授权；API Demo 需要提供服务地址、模型与 API Key。
@@ -106,9 +107,31 @@ python3 -m http.server 8798 --bind 127.0.0.1
 
 Cloudflare 项目需要配置平台授权和 `ACCESS_PIN`。离线文件与纯静态预览可直接打开。详细步骤见 [部署流程](references/deployment.md) 和 [检查与交付](references/validation.md)。
 
+## 一键导出，无需 Agent 改代码
+
+在生成的产品项目目录运行：
+
+```sh
+npm run export:html                    # 单个可离线打开的 HTML
+npm run export:pdf -- --lang zh         # 中文 PDF
+npm run export:pdf -- --lang en         # 英文 PDF
+npm run export -- --lang both           # HTML + 中文 PDF + 英文 PDF
+```
+
+默认输出到 `dist/exports/`；可加 `--output-dir "目标目录"`。PDF 第一次需要安装浏览器依赖：
+
+```sh
+npm install --no-save playwright
+npx playwright install chromium
+```
+
+后续只更新内容、执行命令即可。HTML 不需要这些 npm 依赖；PDF 导出自动起停本地服务、完整显示动效内容，并按 16:9 分页。HTML 保留双语切换与交互，PDF 是静态内容。已有 Chromium 可用 `--browser-executable` 或 `BROWSER_EXECUTABLE` 指定。
+
+默认 `npm run build`、导出和 `npm test` 只处理本地文件。部署模板在初始化时提供；日常内容修改无需改动 deploy/。明确需要发布时才执行对应平台的打包和部署命令。
+
 ## Demo 与目录结构
 
-`demo/index.html` 是可直接打开的两页离线演示。重新生成：
+`demo/index.html` 是可直接打开的两页离线演示；`demo/thank-you.html` 为独立的通用致谢页预览。致谢页以纯白左右布局同时呈现中英文，可直接复用 `assets/starters/thank-you.json` 中的页面配置。重新生成：
 
 ```sh
 python3 scripts/build-demo.py

@@ -106,6 +106,19 @@ for i,s in enumerate(D['slides']):
   image=backgrounds[background]
   content=header+f'<div class="cover-landscape" style="background-image:linear-gradient(180deg,#f7f9fc 0%,#f7f9fcbd 18%,#f7f9fc00 43%),url(&quot;{image}&quot;)"></div><div class="cover-copy"><div class="eyebrow"><span class="red-rule"></span>{text(s.get("eyebrow","PRODUCT BRIEFING"))}</div><h1>{title}</h1><p class="cover-subtitle">{text(s.get("subtitle",""))}</p><div class="cover-line"></div><p class="cover-english">{text(s.get("tagline","HUAWEI CLOUD"))}</p></div><div class="cover-bottom"><span>PRODUCT BRIEFING</span><span>{text(D.get("brandLabel","HUAWEI CLOUD"))}</span></div>'
   cls='cover'
+ elif s['type']=='closing':
+  thanks=s.get('thanks',{'zh':'','en':'Thank You'})
+  vision=s.get('vision',{'zh':'把数字世界带入每个人、每个家庭、\n每个组织，构建万物互联的智能世界。','en':'Bring digital to every person, home and organization\nfor a fully connected, intelligent world.'})
+  for value in [thanks,vision]:
+   if not isinstance(value,dict) or set(value)!={'zh','en'} or not all(isinstance(v,str) for v in value.values()):raise ValueError('Closing copy requires simultaneous zh/en strings')
+  logo=s.get('logo','assets/huawei-logo.png')
+  if not isinstance(logo,str) or not re.fullmatch(r'assets/[A-Za-z0-9_-]+\.(png|jpg|jpeg|svg|webp)',logo) or not (ROOT/logo).is_file():raise ValueError('Closing logo must be an existing local assets/file.ext')
+  motion=s.get('motion','fade')
+  if motion not in {'fade','none'}:raise ValueError('Closing motion must be fade or none')
+  secondary=f'<p lang="zh-CN">{text(thanks["zh"])}</p>' if thanks['zh'] else ''
+  vision_label=f'<div class="closing-vision-label">{text(s["visionLabel"])}</div>' if s.get('visionLabel') else ''
+  content=f'<div class="closing-layout" data-no-translate data-closing-motion="{motion}"><div class="closing-greeting"><h1 lang="en">{text(thanks["en"])}</h1>{secondary}</div><div class="closing-vision">{vision_label}<p class="closing-vision-zh" lang="zh-CN">{text(vision["zh"])}</p><p class="closing-vision-en" lang="en">{text(vision["en"])}</p><img class="closing-logo" src="{text(logo)}" alt="{text(s.get("logoAlt","HUAWEI"))}"></div></div>'
+  cls='closing-slide'
  else:
   content=header+f'<div class="heading"><div class="eyebrow">{text(s.get("eyebrow","PRODUCT CAPABILITIES"))}</div><h2>{title}</h2><p>{text(s.get("subtitle",""))}</p></div><div class="kit-body">'+body(s)+'</div>'+f'<footer class="slide-footer"><span>{text(s.get("footer",D.get("footer","HUAWEI CLOUD")))}</span><span>{n}</span></footer>'
   cls='kit-slide'
